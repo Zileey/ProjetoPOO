@@ -1,4 +1,4 @@
 package Caracteristicas;
 
-public class Nadador {
+abstract class Nadador {
 }
