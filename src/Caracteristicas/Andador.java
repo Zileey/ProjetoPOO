@@ -1,5 +1,5 @@
 package Caracteristicas;
 
-public class Andador {
-    private
+abstract class Andador {
+    
 }

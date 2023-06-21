@@ -1,6 +1,7 @@
 package Caracteristicas;
 
-public  class Aereo {
+abstract class Aereo {
+    
     private int VelocidadeV;
     private int AlturaMax;
 
