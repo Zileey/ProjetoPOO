@@ -2,7 +2,8 @@ package Caracteristicas;
 
 abstract class Aereo {
     
-    private int VelocidadeV;
-    private int AlturaMax;
+    public void String(){
+        System.out.println("Tem uma velocidade aéreo");
+    }
 
 }
