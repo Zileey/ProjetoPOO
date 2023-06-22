@@ -23,6 +23,10 @@ public class Treinador {
         return Nome;
     }
 
+    public Treinador(List<Pokemon> pokemaes) {
+        this.Pokemaes = pokemaes;
+    }
+
     public void setNome(String nome) {
         Nome = nome;
     }
@@ -41,5 +45,17 @@ public class Treinador {
 
     public void setRegiao(String regiao) {
         Regiao = regiao;
+    }
+
+    public void addPokemaes(Pokemon pokemon){
+        Pokemaes.add(pokemon);
+    }
+
+    public List<Pokemon> getPokemaes() {
+        return Pokemaes;
+    }
+
+    public void setPokemaes(List<Pokemon> pokemaes) {
+        this.Pokemaes = pokemaes;
     }
 }

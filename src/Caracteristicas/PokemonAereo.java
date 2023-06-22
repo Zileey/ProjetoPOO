@@ -10,6 +10,6 @@ public class PokemonAereo extends Pokemon implements Voador {
 
     @Override
     public void Voando() {
-
+        System.out.println("");
     }
 }
