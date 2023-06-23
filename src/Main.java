@@ -21,7 +21,6 @@ public class Main {
         String nomeArquivo = "Registro.txt";
         //
         String conteudo = "";
-
         Path caminhoArquivo = Path.of(nomeArquivo);
 
         //Criando os pokemons para a lista
@@ -65,11 +64,11 @@ public class Main {
         idade = sc.nextInt();
         try { //Tratamento de exceção de idade
             if(idade < 10){ //Caso a idade do treinador seja menor que 10 ocorrerá um erro
-                throw new idadeMinimaException("Você não pussuí idade mínima para ser um treinador.");
+                throw new idadeMinimaException("Você não possuí idade mínima para ser um treinador.");
             }
         }catch (idadeMinimaException e){
             System.out.println("Erro: " + e.getMessage()); //Mostra o erro da exceção
-            return;
+            return; //O programa se encerra caso o erro for notado.
         }
         System.out.print("Digite sua Região: \n");
         sc.nextLine();
@@ -102,6 +101,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i); //Pega o pokemon da lista em um objeto
                             if (pokemon.tipo.equals("Agua")) { //se ele for do tipo Agua, então será mostrado suas informações
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 aqua.add(pokemon);
                             }
                         }
@@ -128,6 +128,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Eletrico")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 raio.add(pokemon);
                             }
                         }
@@ -153,6 +154,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Fogo")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 fire.add(pokemon);
                             }
                         }
@@ -177,6 +179,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Normal")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 nor.add(pokemon);
                             }
                         }
@@ -203,6 +206,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Pedra")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 rock.add(pokemon);
                             }
                         }
@@ -230,6 +234,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Voador")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 fly.add(pokemon);
                             }
                         }
@@ -256,6 +261,7 @@ public class Main {
                             Pokemon pokemon = catalogo.get(i);
                             if (pokemon.tipo.equals("Fantasma")) {
                                 pokemon.mostrarInfo();
+                                System.out.println(" ");
                                 ghost.add(pokemon);
                             }
                         }
