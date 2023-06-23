@@ -21,4 +21,10 @@ public abstract class Pokemon{
         System.out.println("Tipo do pokemon: "+ this.tipo);
         System.out.println("Peso do pokemon: "+ this.peso + "kg");
     }
+
+    public abstract class ClasseAbstrata {
+        // Outros membros e variáveis da classe
+
+        public abstract void mostrarPokemonPorTipo(String tipo);
+    }
 }

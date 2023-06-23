@@ -21,6 +21,7 @@ public class PokemonAereo extends Pokemon implements Voador, Normal {
     }
     @Override
     public void mostrarInfo() {
+        super.mostrarInfo();
         System.out.println("Velocidade de vôo: "+ this.VelocidadeV);
         System.out.println("Altura máxima: "+this.AlturaMax);
     }
