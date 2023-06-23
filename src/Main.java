@@ -48,11 +48,11 @@ public class Main {
         System.out.println("|| Seja Bem vindo ao Registro de Treinadores Pokemons ||");
         System.out.println("||====================================================||");
         System.out.println("");
-        System.out.print("\nDigite seu nome: ");
+        System.out.print("Digite seu nome: \n");
         nome = sc.nextLine();
-        System.out.print("Digite sua idade: ");
+        System.out.print("Digite sua idade: \n");
         idade = sc.nextInt();
-        System.out.print("Digite sua Região: ");
+        System.out.print("Digite sua Região: \n");
         sc.nextLine();
         regiao = sc.nextLine();
 
@@ -77,7 +77,7 @@ public class Main {
             switch (tipo) {
                 case 1:
                     List<Pokemon> aqua = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokemons de água: \n");
+                    System.out.println("Temos os seguintes pokémons de água: \n");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i); //Pega o pokemon da lista em um objeto
                         if (pokemon.tipo.equals("Agua")) { //se ele for do tipo Agua, então será mostrado suas informações
@@ -98,27 +98,27 @@ public class Main {
                     break;
                 case 2:
                     List<Pokemon> raio = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokemons Elétricos: \n");
+                    System.out.println("Temos os seguintes pokémons Elétricos: \n");
                     for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemonr = catalogo.get(i);
-                        if (pokemonr.tipo.equals("Eletrico")) {
-                            pokemonr.mostrarInfo();
-                            raio.add(pokemonr);
+                        Pokemon pokemon = catalogo.get(i);
+                        if (pokemon.tipo.equals("Eletrico")) {
+                            pokemon.mostrarInfo();
+                            raio.add(pokemon);
                         }
                     }
                     System.out.println("Escolha um pokémon do tipo Elétrico digitando o número correspondente: ");
 
                     int opcao2 = sc.nextInt();
                     for (int i = 0; i < raio.size(); i++) {
-                        Pokemon pokemonr = raio.get(i);
-                        if (pokemonr.num == opcao2) {
-                            Pokemaes_1.add(pokemonr);
+                        Pokemon pokemon = raio.get(i);
+                        if (pokemon.num == opcao2) {
+                            Pokemaes_1.add(pokemon);
                         }
                     }
                         break;
                 case 3:
                     List<Pokemon> fire = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokemons de Fogo: \n");
+                    System.out.println("Temos os seguintes pokémons de Fogo: \n");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i);
                         if (pokemon.tipo.equals("Fogo")) {
@@ -136,86 +136,88 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.println("Temos os seguintes pokemons do tipo Normal: ");
+                    List<Pokemon> nor = new ArrayList<Pokemon>();
+                    System.out.println("Temos os seguintes pokémons do tipo Normal: ");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i);
                         if (pokemon.tipo.equals("Normal")) {
-                            System.out.println(pokemon.nome);
+                            pokemon.mostrarInfo();
+                            nor.add(pokemon);
                         }
                     }
-                    System.out.println("");
-                    System.out.println("Deseja escolher o Rattata? 1-Sim 2-Nao");
-
+                    System.out.println("Escolha um pokémon do tipo Normal digitando o numero correspondente:");
                     int opcao4 = sc.nextInt();
-                    if(opcao4 == 1){
-                        PokemonNormal rattata = (PokemonNormal) catalogo.get(10);
-                        System.out.println("Nome: " + rattata.nome);
-                        System.out.println("Tipo: " + rattata.tipo);
-                        System.out.println("Peso: " + rattata.peso);
-                    }
 
+                    for (int i = 0; i < nor.size(); i++) {
+                        Pokemon pokemon = nor.get(i);
+                        if (pokemon.num == opcao4) {
+                            Pokemaes_1.add(pokemon);
+                        }
+                    }
                     break;
 
                 case 5:
-                    System.out.println("Temos os seguintes pokemons de Pedra: ");
+                    List<Pokemon> rock = new ArrayList<Pokemon>();
+                    System.out.println("Temos os seguintes pokémons de Pedra: ");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i);
                         if (pokemon.tipo.equals("Pedra")) {
-                            System.out.println(pokemon.nome);
+                            pokemon.mostrarInfo();
+                            rock.add(pokemon);
                         }
                     }
 
-                    System.out.println("");
-                    System.out.println("Deseja escolher o Onix? 1-Sim 2-Nao");
-
+                    System.out.println("Escolha um pokémon do tipo Pedra digitando o número correspondente:");
                     int opcao5 = sc.nextInt();
-                    if(opcao5 == 1){
-                        PokemonRocha onix = (PokemonRocha) catalogo.get(6);
-                        System.out.println("Nome: " + onix.nome);
-                        System.out.println("Tipo: " + onix.tipo);
-                        System.out.println("Peso: " + onix.peso);
-                    }
 
+                    for (int i = 0; i < rock.size(); i++) {
+                        Pokemon pokemon = rock.get(i);
+                        if (pokemon.num == opcao5) {
+                            Pokemaes_1.add(pokemon);
+                        }
+                    }
                     break;
 
                 case 6:
+                    List<Pokemon> fly = new ArrayList<Pokemon>();
                     System.out.println("Temos os seguintes pokemons Voadores: ");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i);
                         if (pokemon.tipo.equals("Voador")) {
-                            System.out.println(pokemon.nome);
+                            pokemon.mostrarInfo();
+                            fly.add(pokemon);
                         }
                     }
-                    System.out.println("");
-                    System.out.println("Deseja escolher o Pidgey? 1-Sim 2-Nao");
-
+                    System.out.println("Escolha um pokémon voador digitando o número correspondente: ");
                     int opcao6 = sc.nextInt();
-                    if(opcao6 == 1){
-                        PokemonAereo pidgay = (PokemonAereo) catalogo.get(0);
-                        System.out.println("Nome: " + pidgay.nome);
-                        System.out.println("Tipo: " + pidgay.tipo);
-                        System.out.println("Peso: " + pidgay.peso);
+
+                    for (int i = 0; i <fly.size(); i++) {
+                        Pokemon pokemon = fly.get(i);
+                        if (pokemon.num == opcao6) {
+                            Pokemaes_1.add(pokemon);
+                        }
                     }
                     break;
 
                 case 7:
+                    List<Pokemon> ghost = new ArrayList<Pokemon>();
                     System.out.println("Temos os seguintes pokemons Fantasma: ");
                     for (int i = 0; i < catalogo.size(); i++) {
                         Pokemon pokemon = catalogo.get(i);
                         if (pokemon.tipo.equals("Fantasma")) {
-                            System.out.println(pokemon.nome);
+                            pokemon.mostrarInfo();
+                            ghost.add(pokemon);
                         }
                     }
 
-                    System.out.println("");
-                    System.out.println("Deseja escolher o Gengar? 1-Sim 2-Nao");
-
+                    System.out.println("Escolha um pokémon do tipo fantasma digitando o número correspondente: ");
                     int opcao7 = sc.nextInt();
-                    if(opcao7 == 1){
-                        PokemonArrepiante gengar = (PokemonArrepiante) catalogo.get(3);
-                        System.out.println("Nome: " + gengar.nome);
-                        System.out.println("Tipo: " + gengar.tipo);
-                        System.out.println("Peso: " + gengar.peso);
+
+                    for (int i = 0; i <ghost.size(); i++) {
+                        Pokemon pokemon = ghost.get(i);
+                        if (pokemon.num == opcao7) {
+                            Pokemaes_1.add(pokemon);
+                        }
                     }
                     break;
 
