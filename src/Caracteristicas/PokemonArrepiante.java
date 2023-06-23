@@ -3,6 +3,8 @@ package Caracteristicas;
 import SuperClasse.Pokemon;
 import Tipos.Fantasma;
 
+import java.sql.SQLOutput;
+
 public class PokemonArrepiante extends Pokemon implements Fantasma {
 
     public PokemonArrepiante(String nome, String tipo, int num, float peso) {
@@ -11,19 +13,16 @@ public class PokemonArrepiante extends Pokemon implements Fantasma {
 
     @Override
     public void mostrarInfo() {
-        System.out.println("Número do SuperClasse.Pokemon: "+ this.num);
-        System.out.println("Nome do pokemon: "+ this.nome);
-        System.out.println("Tipo do pokemon: "+ this.tipo);
-        System.out.println("Peso do pokemon: "+ this.num);
+        super.mostrarInfo();
     }
 
     @Override
     public void estaAssustando() {
-
+        System.out.println("BOO!");
     }
 
     @Override
     public void boo() {
-
+        System.out.println("Atrás de você!");
     }
 }

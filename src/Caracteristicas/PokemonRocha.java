@@ -4,20 +4,21 @@ import SuperClasse.Pokemon;
 import Tipos.Pedra;
 
 public class PokemonRocha extends Pokemon implements Pedra {
-    public PokemonRocha(String nome, String tipo, int num, float peso) {
+    int TempoDeResistencia;
+
+    public PokemonRocha(String nome, String tipo, int num, float peso, int tempoDeResistencia) {
         super(nome, tipo, num, peso);
+        TempoDeResistencia = tempoDeResistencia;
     }
 
     @Override
     public void mostrarInfo() {
-        System.out.println("Número do SuperClasse.Pokemon: "+ this.num);
-        System.out.println("Nome do pokemon: "+ this.nome);
-        System.out.println("Tipo do pokemon: "+ this.tipo);
-        System.out.println("Peso do pokemon: "+ this.num);
+        super.mostrarInfo();
+        System.out.println("Tempo de resistencia: "+ this.TempoDeResistencia);
     }
 
     @Override
     public void taDuro() {
-
+        System.out.println("O pokemon está mais resistente!");
     }
 }

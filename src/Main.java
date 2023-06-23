@@ -1,5 +1,9 @@
 import Caracteristicas.*;
+import Exceptions.idadeMinimaException;
 import SuperClasse.Pokemon;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +17,26 @@ public class Main {
         int tipo;
         boolean flag = true;
 
+        //Nome do arquivo em que vai ser gravado
+        String nomeArquivo = "Registro.txt";
+        //
+        String conteudo = "";
+
+        Path caminhoArquivo = Path.of(nomeArquivo);
+
         //Criando os pokemons para a lista
         List<Pokemon> catalogo = new ArrayList<Pokemon>();
         PokemonAereo Pidgey = new PokemonAereo("Pidgey","Voador",1, 12.5F,50,25);
         PokemonArrepiante Gengar = new PokemonArrepiante("Gengar","Fantasma",4,0);
-        PokemonNadador Squirtle = new PokemonNadador("Squirtle","Agua",2,23);
-        PokemonNadador Blastoise = new PokemonNadador("Blastoise","Agua",5,120);
-        PokemonNadador Staryu = new PokemonNadador("Staryu","Agua",6,5);
-        PokemonQuente Charmander = new PokemonQuente("Charmander","Fogo",3,30);
-        PokemonChocante Pikachu = new PokemonChocante ("Pikachu" , "Eletrico", 8 , 32);
-        PokemonChocante Raichu = new PokemonChocante ("Raichu" , "Eletrico", 9 , 56);
-        PokemonChocante Electabuzz = new PokemonChocante ("Electabuzz" , "Eletrico", 10 , 86);
+        PokemonNadador Squirtle = new PokemonNadador("Squirtle","Agua",2,23,25.6F,50);
+        PokemonNadador Blastoise = new PokemonNadador("Blastoise","Agua",5,120,12.2F,20);
+        PokemonNadador Staryu = new PokemonNadador("Staryu","Agua",6,5,0.1F,100);
+        PokemonQuente Charmander = new PokemonQuente("Charmander","Fogo",3,30,120);
+        PokemonChocante Pikachu = new PokemonChocante ("Pikachu" , "Eletrico", 8 , 32,500);
+        PokemonChocante Raichu = new PokemonChocante ("Raichu" , "Eletrico", 9 , 56,217);
+        PokemonChocante Electabuzz = new PokemonChocante ("Electabuzz" , "Eletrico", 10 , 86,1500);
         PokemonNormal Rattata = new PokemonNormal ("Rattata", "Normal", 11 , 18);
-        PokemonRocha Onix = new PokemonRocha ("Onix","Pedra", 7 , 450);
+        PokemonRocha Onix = new PokemonRocha ("Onix","Pedra", 7 , 450,60);
 
 
         //Adicionando os pokemons para a lista
@@ -52,13 +63,21 @@ public class Main {
         nome = sc.nextLine();
         System.out.print("Digite sua idade: \n");
         idade = sc.nextInt();
+        try { //Tratamento de exceção de idade
+            if(idade < 10){ //Caso a idade do treinador seja menor que 10 ocorrerá um erro
+                throw new idadeMinimaException("Você não pussuí idade mínima para ser um treinador.");
+            }
+        }catch (idadeMinimaException e){
+            System.out.println("Erro: " + e.getMessage()); //Mostra o erro da exceção
+            return;
+        }
         System.out.print("Digite sua Região: \n");
         sc.nextLine();
         regiao = sc.nextLine();
 
         //Lista de Pokemons que o treinador tem
         Treinador trainer1 = new Treinador(nome, idade, regiao);
-        List<Pokemon> Pokemaes_1 = null;
+        List<Pokemon> Pokemaes_1 = new ArrayList<>();
 
         while (flag) {
             //Menu para adicionar pokemons á lista do treinador
@@ -76,152 +95,194 @@ public class Main {
 
             switch (tipo) {
                 case 1:
-                    List<Pokemon> aqua = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokémons de água: \n");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i); //Pega o pokemon da lista em um objeto
-                        if (pokemon.tipo.equals("Agua")) { //se ele for do tipo Agua, então será mostrado suas informações
-                            pokemon.mostrarInfo();
-                            aqua.add(pokemon);
+                    try {
+                        List<Pokemon> aqua = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokémons de água: \n");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i); //Pega o pokemon da lista em um objeto
+                            if (pokemon.tipo.equals("Agua")) { //se ele for do tipo Agua, então será mostrado suas informações
+                                pokemon.mostrarInfo();
+                                aqua.add(pokemon);
+                            }
                         }
-                    }
-                    System.out.println("Escolha um pokémon de água digitando o número correspondente: ");
+                        System.out.println("Escolha um pokémon de água digitando o número correspondente: ");
 
-                    int opcao = sc.nextInt();//Mostra todos os pokemons que foram identificados com o tipo
-                    for (int i = 0; i < aqua.size(); i++) {
-                        Pokemon pokemon = aqua.get(i);
-                        if (pokemon.num == opcao){
-                            Pokemaes_1.add(pokemon);
-                            //Se o numero digitado é igual ao numero do pokemon, ele é adicionado á lista do treinador
+                        int opcao = sc.nextInt();//Mostra todos os pokemons que foram identificados com o tipo
+                        for (int i = 0; i < aqua.size(); i++) {
+                            Pokemon pokemon = aqua.get(i);
+                            if (pokemon.num == opcao) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                                //Se o numero digitado é igual ao numero do pokemon, ele é adicionado á lista do treinador
+                            }
                         }
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
                     break;
                 case 2:
-                    List<Pokemon> raio = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokémons Elétricos: \n");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Eletrico")) {
-                            pokemon.mostrarInfo();
-                            raio.add(pokemon);
+                    try {
+                        List<Pokemon> raio = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokémons Elétricos: \n");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Eletrico")) {
+                                pokemon.mostrarInfo();
+                                raio.add(pokemon);
+                            }
                         }
-                    }
-                    System.out.println("Escolha um pokémon do tipo Elétrico digitando o número correspondente: ");
+                        System.out.println("Escolha um pokémon do tipo Elétrico digitando o número correspondente: ");
 
-                    int opcao2 = sc.nextInt();
-                    for (int i = 0; i < raio.size(); i++) {
-                        Pokemon pokemon = raio.get(i);
-                        if (pokemon.num == opcao2) {
-                            Pokemaes_1.add(pokemon);
+                        int opcao2 = sc.nextInt();
+                        for (int i = 0; i < raio.size(); i++) {
+                            Pokemon pokemon = raio.get(i);
+                            if (pokemon.num == opcao2) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
                         break;
                 case 3:
-                    List<Pokemon> fire = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokémons de Fogo: \n");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Fogo")) {
-                            pokemon.mostrarInfo();
-                            fire.add(pokemon);
+                    try {
+                        List<Pokemon> fire = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokémons de Fogo: \n");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Fogo")) {
+                                pokemon.mostrarInfo();
+                                fire.add(pokemon);
+                            }
                         }
-                    }
-                    System.out.println("Escolha um pokémon do tipo Fogo digitando o número correspondente:");
-                    int opcao3 = sc.nextInt();
-                    for (int i = 0;i < fire.size(); i++) {
-                        Pokemon pokemon = fire.get(i);
-                        if (pokemon.num == opcao3) {
-                            Pokemaes_1.add(pokemon);
+                        System.out.println("Escolha um pokémon do tipo Fogo digitando o número correspondente:");
+                        int opcao3 = sc.nextInt();
+                        for (int i = 0; i < fire.size(); i++) {
+                            Pokemon pokemon = fire.get(i);
+                            if (pokemon.num == opcao3) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
                     break;
                 case 4:
-                    List<Pokemon> nor = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokémons do tipo Normal: ");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Normal")) {
-                            pokemon.mostrarInfo();
-                            nor.add(pokemon);
+                    try {
+                        List<Pokemon> nor = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokémons do tipo Normal: ");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Normal")) {
+                                pokemon.mostrarInfo();
+                                nor.add(pokemon);
+                            }
                         }
-                    }
-                    System.out.println("Escolha um pokémon do tipo Normal digitando o numero correspondente:");
-                    int opcao4 = sc.nextInt();
+                        System.out.println("Escolha um pokémon do tipo Normal digitando o numero correspondente:");
+                        int opcao4 = sc.nextInt();
 
-                    for (int i = 0; i < nor.size(); i++) {
-                        Pokemon pokemon = nor.get(i);
-                        if (pokemon.num == opcao4) {
-                            Pokemaes_1.add(pokemon);
+                        for (int i = 0; i < nor.size(); i++) {
+                            Pokemon pokemon = nor.get(i);
+                            if (pokemon.num == opcao4) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
                     break;
 
                 case 5:
-                    List<Pokemon> rock = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokémons de Pedra: ");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Pedra")) {
-                            pokemon.mostrarInfo();
-                            rock.add(pokemon);
+                    try {
+                        List<Pokemon> rock = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokémons de Pedra: ");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Pedra")) {
+                                pokemon.mostrarInfo();
+                                rock.add(pokemon);
+                            }
                         }
-                    }
 
-                    System.out.println("Escolha um pokémon do tipo Pedra digitando o número correspondente:");
-                    int opcao5 = sc.nextInt();
+                        System.out.println("Escolha um pokémon do tipo Pedra digitando o número correspondente:");
+                        int opcao5 = sc.nextInt();
 
-                    for (int i = 0; i < rock.size(); i++) {
-                        Pokemon pokemon = rock.get(i);
-                        if (pokemon.num == opcao5) {
-                            Pokemaes_1.add(pokemon);
+                        for (int i = 0; i < rock.size(); i++) {
+                            Pokemon pokemon = rock.get(i);
+                            if (pokemon.num == opcao5) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                        break;
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
-                    break;
 
                 case 6:
-                    List<Pokemon> fly = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokemons Voadores: ");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Voador")) {
-                            pokemon.mostrarInfo();
-                            fly.add(pokemon);
+                    try {
+                        List<Pokemon> fly = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokemons Voadores: ");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Voador")) {
+                                pokemon.mostrarInfo();
+                                fly.add(pokemon);
+                            }
                         }
-                    }
-                    System.out.println("Escolha um pokémon voador digitando o número correspondente: ");
-                    int opcao6 = sc.nextInt();
+                        System.out.println("Escolha um pokémon voador digitando o número correspondente: ");
+                        int opcao6 = sc.nextInt();
 
-                    for (int i = 0; i <fly.size(); i++) {
-                        Pokemon pokemon = fly.get(i);
-                        if (pokemon.num == opcao6) {
-                            Pokemaes_1.add(pokemon);
+                        for (int i = 0; i < fly.size(); i++) {
+                            Pokemon pokemon = fly.get(i);
+                            if (pokemon.num == opcao6) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                        break;
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
-                    break;
 
                 case 7:
-                    List<Pokemon> ghost = new ArrayList<Pokemon>();
-                    System.out.println("Temos os seguintes pokemons Fantasma: ");
-                    for (int i = 0; i < catalogo.size(); i++) {
-                        Pokemon pokemon = catalogo.get(i);
-                        if (pokemon.tipo.equals("Fantasma")) {
-                            pokemon.mostrarInfo();
-                            ghost.add(pokemon);
+                    try {
+                        List<Pokemon> ghost = new ArrayList<Pokemon>();
+                        System.out.println("Temos os seguintes pokemons Fantasma: ");
+                        for (int i = 0; i < catalogo.size(); i++) {
+                            Pokemon pokemon = catalogo.get(i);
+                            if (pokemon.tipo.equals("Fantasma")) {
+                                pokemon.mostrarInfo();
+                                ghost.add(pokemon);
+                            }
                         }
-                    }
 
-                    System.out.println("Escolha um pokémon do tipo fantasma digitando o número correspondente: ");
-                    int opcao7 = sc.nextInt();
+                        System.out.println("Escolha um pokémon do tipo fantasma digitando o número correspondente: ");
+                        int opcao7 = sc.nextInt();
 
-                    for (int i = 0; i <ghost.size(); i++) {
-                        Pokemon pokemon = ghost.get(i);
-                        if (pokemon.num == opcao7) {
-                            Pokemaes_1.add(pokemon);
+                        for (int i = 0; i < ghost.size(); i++) {
+                            Pokemon pokemon = ghost.get(i);
+                            if (pokemon.num == opcao7) {
+                                Pokemaes_1.add(pokemon);
+                                System.out.println("Você escolheu o " + pokemon.nome + "!");
+                            }
                         }
+                    }catch(NullPointerException e){ //Tratamento de erros para NullPointer
+                        System.out.println("Ocorreu um erro. Verifique se o tipo do Pokemon está definido corretamente.");
                     }
-                    break;
+                        break;
 
                 case 8:
+                    System.out.println("Você escolheu os seguintes pokemons: ");
+                    conteudo = "Pokemons:";
+                    for (int i = 0; i < Pokemaes_1.size(); i++) {
+                        Pokemon pokemon = Pokemaes_1.get(i);
+                        System.out.println(pokemon.nome);
+                    }
+                    System.out.println("Seu registro já está concluído!");
                     flag = false;
                     break;
 

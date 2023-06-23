@@ -1,6 +1,6 @@
 package SuperClasse;
 
-public abstract class Pokemon{
+public abstract class Pokemon {
 
     public String nome;
     public String tipo;
@@ -15,16 +15,10 @@ public abstract class Pokemon{
         this.peso = peso;
     }
 
-    public void mostrarInfo(){
-        System.out.println("Número do Pokemon: "+ this.num);
-        System.out.println("Nome do pokemon: "+ this.nome);
-        System.out.println("Tipo do pokemon: "+ this.tipo);
-        System.out.println("Peso do pokemon: "+ this.peso + "kg");
-    }
-
-    public abstract class ClasseAbstrata {
-        // Outros membros e variáveis da classe
-
-        public abstract void mostrarPokemonPorTipo(String tipo);
+    public void mostrarInfo() {
+        System.out.println("Número do Pokemon: " + this.num);
+        System.out.println("Nome do pokemon: " + this.nome);
+        System.out.println("Tipo do pokemon: " + this.tipo);
+        System.out.println("Peso do pokemon: " + this.peso + "kg");
     }
 }

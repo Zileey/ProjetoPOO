@@ -13,14 +13,11 @@ public class PokemonNormal extends Pokemon implements Normal{
 
     @Override
     public void Existindo() {
-
+        System.out.println("Ele está apenas existindo!");
     }
 
     @Override
     public void mostrarInfo() {
-        System.out.println("Número do SuperClasse.Pokemon: "+ this.num);
-        System.out.println("Nome do pokemon: "+ this.nome);
-        System.out.println("Tipo do pokemon: "+ this.tipo);
-        System.out.println("Peso do pokemon: "+ this.num);
+        super.mostrarInfo();
     }
 }
