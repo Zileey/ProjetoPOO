@@ -7,7 +7,7 @@ public abstract class Pokemon {
     public int num;
     public float peso;
 
-
+    //Contrutor da classe
     public Pokemon(String nome, String tipo, int num, float peso) {
         this.nome = nome;
         this.tipo = tipo;
@@ -15,7 +15,7 @@ public abstract class Pokemon {
         this.peso = peso;
     }
 
-    public void mostrarInfo() {
+    public void mostrarInfo() { //Método herdado para todos os pokémons
         System.out.println("Número do Pokemon: " + this.num);
         System.out.println("Nome do pokemon: " + this.nome);
         System.out.println("Tipo do pokemon: " + this.tipo);
