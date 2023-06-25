@@ -17,11 +17,6 @@ public class Main {
         int tipo;
         boolean flag = true;
 
-        //Nome do arquivo em que vai ser gravado
-        String nomeArquivo = "Registro.txt";
-        //
-        String conteudo = "";
-        Path caminhoArquivo = Path.of(nomeArquivo);
 
         //Criando os pokemons para a lista
         List<Pokemon> catalogo = new ArrayList<Pokemon>();
@@ -95,7 +90,7 @@ public class Main {
             switch (tipo) {
                 case 1:
                     try {
-                        List<Pokemon> aqua = new ArrayList<Pokemon>();
+                        List<Pokemon> aqua = new ArrayList<Pokemon>(); //Criando uma lista somente de pokémons do tipo agua
                         System.out.println("Temos os seguintes pokémons de água: \n");
                         for (int i = 0; i < catalogo.size(); i++) {
                             Pokemon pokemon = catalogo.get(i); //Pega o pokemon da lista em um objeto
@@ -282,13 +277,15 @@ public class Main {
                         break;
 
                 case 8:
+                    System.out.println("Seu registro já está concluído!\n");
+                    System.out.println("Seu nome: "+nome);
+                    System.out.println("Sua idade: "+idade);
+                    System.out.println("Sua Região: "+regiao+"\n");
                     System.out.println("Você escolheu os seguintes pokemons: ");
-                    conteudo = "Pokemons:";
                     for (int i = 0; i < Pokemaes_1.size(); i++) {
                         Pokemon pokemon = Pokemaes_1.get(i);
                         System.out.println(pokemon.nome);
                     }
-                    System.out.println("Seu registro já está concluído!");
                     flag = false;
                     break;
 
