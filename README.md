@@ -10,4 +10,10 @@
 > Projeto feito utilizando o Java, linguagem utilizado na disciplina de Programação Orientada a Objeto do Profº Christofer
 
 
-### Utilizando a aplicação
+### Tema da aplicação
+Programa em Java para registro de treinadores de pokémon e escolha de pokémons baseados em um catálogo pré-estipulado.
+
+ # Vídeos explicativos
+ Funcionamento e execução:https://www.youtube.com/watch?v=a5iEG5-slNA
+
+ Explicativa de código: https://youtu.be/IJKsp8GAtlk
